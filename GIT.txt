@@ -1,0 +1,96 @@
+=======================================================================================================================================================================
+                                                                                  GIT
+=======================================================================================================================================================================
+git init
+git status
+git status -s
+git config --list
+git confi --global push.default simple
+git config --global user.name "name"
+git config --global user.email "email-id"
+
+touch f1 f2
+git add filename
+git add .
+git add --all
+
+git commit -m "description" filename
+git commit am"message"
+git commit --amend  -#head wll be moved everytime you change the message
+git diff filename
+git diff --staged filename
+git diff --cached filename
+git rm -rf filename
+
+git branch
+git branch branchname
+git checkout branchname
+git checkout -b branchname
+git branch -D branchname
+git checkout -- filename (to discard changes from index/staging to working dir)
+
+move to destination
+git merge branchname --head will be pointing  at both branches (fast-farward merge)
+
+
+git pull
+git fetch
+
+git remote -v
+git remote add remotename url
+git push origin remotename 
+git remote rename oldname newname
+git remote remove remotename
+
+
+git show cid
+
+git clone url--  using ssh or https
+git push origin master
+
+git reset --soft cid     -#resets the head to commitid not marked for commit
+git reset HEAD file-name - -#to unstage a file
+git reset --mixed cid    --resets the index not working tree not marked for commit (get back file to working dirctory)
+git reset --hard cid    --#resets the index and working tree (displays head is now at cid)
+git reflog
+git log
+git log -n
+git log --oneline
+git log --oneline -3
+git log --author=devops
+git log --since=yy-mm-dd
+git log --until=yy-mm-dd
+git log --oneline --decorate
+
+git remote -v
+git 
+github
+create a repo-1
+git clone path/of/crepo
+ls
+cd repo-1
+touch f1 f3 f4
+git add .
+git commit -m "label"
+git push
+username:
+passwd :
+git stash list
+git stash save "stash1"
+git stash list
+git stash show -p stash@{x}
+git stash pop
+git stash pop stash@{x}
+git stash apply
+git stash apply stash@{x}
+git stash drop
+git stash drop stash@{x}
+git tag
+git tag tag-name
+git tag -d v-1.1
+git push origin v-1.1
+git push --tags
+git push origin -d v1.1
+git push –tags
+git pull --rebase https://github.com/BalajiPramod/MavenProject-balu.git
+https://github.com/polarapu/MavenProject.git
