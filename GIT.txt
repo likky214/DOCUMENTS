@@ -86,6 +86,7 @@ git stash apply stash@{x}
 git stash drop
 git stash drop stash@{x}
 git tag
+git tag -a tagname
 git tag tag-name
 git tag -d v-1.1
 git push origin v-1.1
