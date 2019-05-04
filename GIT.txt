@@ -62,6 +62,52 @@ git log --since=yy-mm-dd
 git log --until=yy-mm-dd
 git log --oneline --decorate
 
+-------cherry-pick #1------
+git revert CID(for a file i.e test.java) undo the previous changes
+git cherry-pick CID -## we can get back the reverted file
+git cherry-pick cid cid(multipl cid)
+-------
+------#2----
+on branch dev      |
+create files        |
+$touch ki
+git add ki
+git commit -m"ki"
+
+on branch dev      |
+create files        |
+$touch ka
+git add ka
+git commit -m"ka"
+
+
+on branch dev      |
+create files        |
+$touch ko
+git add ko
+git commit -m"ko"
+
+$ git checkout uit(existing branch)
+$git cherry-pick cid (ka i.e commit id) to get a particular file to branch
+
+########stash#########
+----
+touch 1.txt 2.txt 3.txt
+git add .
+git commit -m"files"
+git push origin master
+
+now remove files rm 1.txt 2.txt
+git pull --rebase
+it will ask for
+   error: cannot pull with rebase: You have unstaged changes.
+    error: please commit or stash them.
+then run $$ git stash
+
+--------------------------
+
+
+
 git remote -v
 git 
 github
@@ -86,10 +132,10 @@ git stash apply stash@{x}
 git stash drop
 git stash drop stash@{x}
 git tag
-git tag -a tagname
+git tag -a tagname -# to create a tag
 git tag tag-name
 git tag -d v-1.1
-git push origin v-1.1
+git push origin v-1.1 -# to push a tag to remote repo
 git push --tags
 git push origin -d v1.1
 git push –tags
