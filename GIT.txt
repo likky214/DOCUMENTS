@@ -106,6 +106,17 @@ then run $$ git stash
 
 --------------------------
 
+#########stash############
+when you are working on suddenly u got to change to some other work then u can pause your work by
+git stash save "stash1"
+git stash
+
+to resume back-$$ git stash pop
+to check stash list-- git stash --list
+ #####another method
+$ git save stash "stash1"
+$git stash list
+$git stash apply stash@{0}
 
 
 git remote -v
