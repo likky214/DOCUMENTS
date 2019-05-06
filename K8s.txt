@@ -1,0 +1,140 @@
+#### kubernetes ####
+
+$Docker is a platform and tool for building, distributing, and running Docker containers. It offers its own native clustering tool that can be used to orchestrate and schedule containers on machine clusters. Kubernetes is a container orchestration system for Docker containers that is more extensive than Docker Swarm and is meant to coordinate clusters of nodes at scale in production in an efficient manner. It works around the concept of pods, which are scheduling units (and can contain one or more containers) in the Kubernetes ecosystem, and they are distributed among nodes to provide high availability. One can easily run a Docker build on a Kubernetes cluster, but Kubernetes itself is not a complete solution and is meant to include custom plugins.
+
+$$WHY KUBERNETES:-
+When public cloud companies bill you for CPU time or storage then you need to make sure you do not have any orphaned machines spinning out there doing nothing. 
+Plus there is the need to automatically spin up more when a machine needs more memory, CPU, or storage, as well as shut them down when the load lightens.
+
+Orchestration tackles these problems. This is where Kubernetes comes in.
+
+NODE:-
+A node is a physical or virtual machine. It is not created by Kubernetes. You create those with a cloud operating system, like OpenStack or Amazon EC2, or manually install them. So you need to lay down your basic infrastructure before you use Kubernetes to deploy your apps
+
+POD:-
+A pod is a one or more containers that logically go together. Pods run on nodes. Pods run together as a logical unit. So they have the same shared content. They all share the IP address but can reach other other via localhost. And they can share storage.
+One node can run multiple pods.
+
+DEPLOYMENT:-
+A set of pods is a deployment. 
+A deployment ensures that a sufficient number of pods are running at one time to service the app and shuts down those pods that are not needed.
+
+##Vendor Agnostic:-
+Kubernetes works with Amazon EC2, Azure Container Service, Rackspace, GCE, IBM Software, and other clouds. And it works with bare-metal (using something like CoreOS), Docker, and vSphere.
+
+
+$$Kubernetes$$-
+1.It is a container management tool.
+2.It is a comprehensive system for automating deployment, scheduling and scaling of containerized applications, and supports many containerization tools such as Docker.
+
+
+#how to check nodes ?
+$kubectl get nodes
+
+# how to check pods?
+$ kubectl get pods
+
+# how to create a pod?
+$ first create a yml file and pass the required data inside the yml file
+
+$ kubectl apply -f pod1.yml
+
+#how to delete a pod ?
+$kubectl delete pod podname
+
+#How to create a namespace ?
+$$ kubectl create namespace test
+
+
+#How to get namespace ?(Default namespaces)
+$$  kubectl get namespace
+
+NAME              STATUS   AGE
+default           Active   3d16h
+kube-node-lease   Active   3d16h
+kube-public       Active   3d16h
+kube-system       Active   3d16h
+
+#how to fetch a namespace running with a pod ?
+$$ kubectl get pods -n namespace_name(dev_service)
+
+NOTE: Namespaces are used for environments in a project i.e:PROD,DEV,UIT Real time
+
+# How to delete a namespace ??
+$kubectl delete namespace dev_service
+$$ kubectl delete pod podname -n namespacename(dev_service)
+
+# how To find a pod running in which node >
+$ kubectl describe pod podname
+$ kubectl describe pod podname | grep IP
+
+Deployment:
+it is supervisor for pods amd repica sets,i.e how and when new pod version is rolled out and rolled back
+
+$ kubectl get deployments
+$kubectl get rs
+$kubectl get pods
+
+###############
+Creating a Deployment- 
+kubectl apply -f dep.yaml
+
+
+#####kind.version.apps/name#######
+Updating a Deployment- from nginx-1.9.1 to nginx--1.7.1
+$kubectl --record deployment.apps/nginx-deployment set image deployment.v1.apps/nginx-deployment nginx=nginx:1.9.1
+
+Rolling Back a Deployment
+#Suppose that you made a typo while updating the Deployment, by putting the image name as nginx:1.91 instead of nginx:1.9.1
+$kubectl set image deployment.v1.apps/nginx-deployment nginx=nginx:1.91 --record=true
+
+
+Scaling a Deployment
+$kubectl scale deployment.v1.apps/nginx-deployment --replicas=10
+
+
+Pausing and Resuming a Deployment
+$kubectl rollout pause deployment.v1.apps/nginx-deployment
+$kubectl rollout resume deployment.v1.apps/nginx-deployment
+#############################
+
+Kubernetes - Replica Sets. 
+Replica Set ensures how many replica of pod should be running. 
+It can be considered as a replacement of replication controller.
+
+Replication controller- equality based selector (env=prod,env=dev)
+Replica set- set based selector (env in(dev,test))
+
+A replication controller (RC) is a supervisor for long-running pods. An RC will launch a specified number of pods called replicas and makes sure that they keep running,
+ for example when a node fails or something inside of a pod, that is, in one of its containers goes wrong.
+
+##NOTE:pods created under Replication controller kind are called replicas..
+
+$$ kubectl get rc
+
+To scale up replicas OR to increase no of replicas
+$ kubectl scale --replicas=3 rc/rcex
+
+
+##Label
+create a label inside a pod.yml file
+labels:
+   env:  development
+   env:  production
+$$ kubectl get pods --show-labels
+$$ kubectl get pods -l env=development
+$$ kubectl get pods -l env!=development
+$$ kubectl get pods -l env in (development,production)
+$$ kubectl get pods -l env not in (development,production)
+
+##NODE selector/ AGENT Selector:
+nodeselector:
+   shouldrun: here
+##To know on which node pod is running 
+$$kubectl label nodes k8agent2 shouldrun=here-
+
+$$kubectl get pods --output=wide --to elobarate pod metadata output
+
+
+
+
