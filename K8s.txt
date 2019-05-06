@@ -18,6 +18,10 @@ One node can run multiple pods.
 ##Vendor Agnostic:-
 Kubernetes works with Amazon EC2, Azure Container Service, Rackspace, GCE, IBM Software, and other clouds. And it works with bare-metal (using something like CoreOS), Docker, and vSphere.
 
+$$kubelet:-
+An agent that runs on each node in the cluster. It makes sure that containers are running in a pod
+The kubelet doesn’t manage containers which were not created by Kubernetes.
+
 
 $$Kubernetes$$-
 1.It is a container management tool.
@@ -134,6 +138,82 @@ $$kubectl label nodes k8agent2 shouldrun=here
 
 $$kubectl get pods --output=wide --to elobarate pod metadata output
 
+CRONJOB:-
+A Cron Job creates Jobs on a time-based schedule.
+One CronJob object is like one line of a crontab (cron table) file. It runs a job periodically on a given schedule, written in Cron format.
 
+TO CREATE A CONJOB:
+kubectl run hello --schedule="*/1 * * * *" --restart=OnFailure --image=busybox -- /bin/sh -c "date; echo Hello from the Kubernetes cluster"
+
+WITH FILE:
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: hello
+spec:
+  schedule: "*/1 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: hello
+            image: busybox
+            args:
+            - /bin/sh
+            - -c
+            - date; echo Hello from the Kubernetes cluster
+          restartPolicy: OnFailure
+
+
+$$$$$kubectl apply -f cronjob1.yml
+$$$$$kubectl get cronjob hello
+
+###TO WATCH CRONJOBS:-
+$$kubectl get jobs --watch
+
+TO DElETE:
+$$$kubectl delete cronjob hello
+
+
+#####SERVICE:
+
+A service is an abstraction for pods,providing a stable virtual IP address ,while pods may come and go but services allow clients 
+to reliably connect to containers running in pods using VIP.
+
+VIP means its not an actual IP address connected to a network interface but its purpose is to purely farword traffic between containers.
+IT is a non-pingale address.It is used for cluster management.
+
+----RC and service--
+rc.yaml
+kind: Replication controller
+metadata:
+    name: rcsise
+selector:
+     app: sise
+
+svc.yaml
+kind: sevice
+metadata: 
+    name: simpleservice
+    
+selector:
+     app: sise
+
+$$ kubectl apply -f rc1.yaml
+$$ kubectl apply -f svc.yaml
+
+$$kubectl get pods
+$$kubectl get pods -l app=sise
+$$kubectl describe pod rsise-kgxt5
+
+Go to node:
+ $$ curl 10.0.1.5:9876/info 
+
+$$kubectl get svc
+$$ kubectl describe svc simpleservice
+$$sudo IPtables-save | grep simpleservice
+$$ kubectl scale --replicas=2 rc/rcise
+$$kubectl get rc
 
 
