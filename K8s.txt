@@ -15,10 +15,6 @@ POD:-
 A pod is a one or more containers that logically go together. Pods run on nodes. Pods run together as a logical unit. So they have the same shared content. They all share the IP address but can reach other other via localhost. And they can share storage.
 One node can run multiple pods.
 
-DEPLOYMENT:-
-A set of pods is a deployment. 
-A deployment ensures that a sufficient number of pods are running at one time to service the app and shuts down those pods that are not needed.
-
 ##Vendor Agnostic:-
 Kubernetes works with Amazon EC2, Azure Container Service, Rackspace, GCE, IBM Software, and other clouds. And it works with bare-metal (using something like CoreOS), Docker, and vSphere.
 
@@ -69,7 +65,10 @@ $ kubectl describe pod podname
 $ kubectl describe pod podname | grep IP
 
 Deployment:
-it is supervisor for pods amd repica sets,i.e how and when new pod version is rolled out and rolled back
+it is supervisor for pods and repica sets,i.e how and when new pod version is rolled out and rolled back
+DEPLOYMENT:-
+A set of pods is a deployment. 
+A deployment ensures that a sufficient number of pods are running at one time to service the app and shuts down those pods that are not needed.
 
 $ kubectl get deployments
 $kubectl get rs
@@ -131,7 +130,7 @@ $$ kubectl get pods -l env not in (development,production)
 nodeselector:
    shouldrun: here
 ##To know on which node pod is running 
-$$kubectl label nodes k8agent2 shouldrun=here-
+$$kubectl label nodes k8agent2 shouldrun=here
 
 $$kubectl get pods --output=wide --to elobarate pod metadata output
 
