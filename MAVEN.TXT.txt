@@ -1,0 +1,83 @@
+Maven, a Yiddish word meaning accumulator of knowledge
+#A Trusted Expert
+
+-Maven is a project-management tool
+-It is used for building java basd applicatons
+-###mavenised project######
+# MAVEN PLUGINS:-
+clean			Clean up after the build.	
+compiler		Compiles Java sources.	
+deploy			Deploy the built artifact to the remote repository.
+failsafe		Run the JUnit integration tests in an isolated classloader.  	Jira SUREFIRE
+install			Install the built artifact into the local repository.	
+resources		Copy the resources to the output directory for including in the JAR.
+site			Generate a site for the current project.
+surefire		Run the JUnit unit tests in an isolated classloader
+verifier		Useful for integration tests - verifies the existence of certain conditions.
+
+Packages-jar,war,ear,ejb,rar
+
+$ mvn --version
+
+$ Creating a project:-
+$$ mvn archetype:generate -DgroupId=com.mycompany.app -DartifactId=my-app -DarchetypeArtifactId=maven-archetype-quickstart 
+-DarchetypeVersion=1.4 -DinteractiveMode=false
+
+-D :- dynamically
+
+## archetype- Archetype is a Maven project templating toolkit
+          Archetype will help authors create Maven project templates for users
+##  Maven Artifact Resolver Provider for Maven repositories
+
+## junit is a framework or library popular for unit testing.
+
+mvn archetype:generate -DgroupId=com.Dcompany.app -DartifactId=dproject -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.4 -DinteractiveMode=false
+
+maven lifecycle/phases:-
+initialize
+vlidate
+compile
+test
+package
+verify
+install
+
+##POM:- Project object model
+
+##You may test the newly compiled and packaged JAR with the following command:
+$$java -cp target/my-app-1.0-SNAPSHOT.jar com.mycompany.app.App
+
+output:- Hello world
+
+###Generating the Site
+$mvn site :- This phase generates a site based upon information on the project's pom. :ie: dependncies, generated jar, test-results
+NOTE:- to understand the dependencies for people in company we are generating site
+
+#REPOSITARIES:-
+1) .m2- local repo
+2) private/remote repo -contains our own jar or war files :i.e NEXUS ARTIFACTORY, JFROG 
+3) central repo - OFFICIAL APACHE-MAVEN 
+
+#SKIPING TEST CASES:-
+$mvn install -DSkipTest
+$mvn install -Dmaven.test.skip=true
+
+#BUILD TYPES:-
+1. Complete build/scratch build/full build :- doing the build from scratch
+2. Incremental build :- doing the build on top of existing build (modified code)
+3. Nightly build :- to run extensive test cases which takes time
+4. Bugfix build :-it should be monitered closely
+5. Adoc/unplanned/emergency build :- if we want to build suddenly
+
+#GAV parameters 
+groupId
+ArfactId
+Version
+
+#WEB APPLICATION 
+##To generate a war file:-
+$mvn archetype:generate -DgroupId=com.likkykart -DartifactId=likkykart -Dversion=1.0-SNAPSHOT -DinteractiveMode=false -DarchetypeArtifactId=maven-archetype-webapp
+
+#Note: -DarchetypeArtifactId=maven-archetype-webapp
+
+
