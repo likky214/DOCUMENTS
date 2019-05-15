@@ -35,7 +35,7 @@ mvn archetype:generate -DgroupId=com.Dcompany.app -DartifactId=dproject -Darchet
 
 maven lifecycle/phases:-
 initialize
-vlidate
+validate
 compile
 test
 package
@@ -71,7 +71,7 @@ $mvn install -Dmaven.test.skip=true
 
 #GAV parameters 
 groupId
-ArfactId
+ArtifactId
 Version
 
 #WEB APPLICATION 
